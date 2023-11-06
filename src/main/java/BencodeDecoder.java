@@ -34,8 +34,15 @@ public class BencodeDecoder {
 
             } else if (Character.isDigit(input.charAt(i))) {
                 // System.out.println(i);;
-                var expectedLength = Integer.parseInt(input.substring(i, i + 1));
-                i++;
+                var expectedLengthString = new StringBuilder();
+                var ch = input.charAt(i);
+                while (ch != ':') {
+                    expectedLengthString.append(ch);
+                    i++;
+                    ch = input.charAt(i);
+                }
+                
+                var expectedLength = Integer.parseInt(expectedLengthString.toString());
                 // System.out.println(i);;
                 var colonChar = input.charAt(i);
 
