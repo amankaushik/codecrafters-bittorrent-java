@@ -12,9 +12,6 @@ public class Main {
       //  String decoded;
        try {
         final var decodeValues = BencodeDecoder.decode(bencodedValue);
-        if (decodeValues.isEmpty()) {
-          return;
-        }
         if (decodeValues.size() == 1) {
           System.out.println(decodeValues.get(0));
           return;
