@@ -13,7 +13,11 @@ public class Main {
        String bencodedValue = args[1];
        String decoded;
        try {
-         decoded = decodeBencodeExtended(bencodedValue);
+        if (bencodedValue.startsWith("i") && bencodedValue.endsWith("e")) {
+          System.out.println(decodeBencodeInteger(bencodedValue));
+          return;
+        }
+         decoded = decodeBencode(bencodedValue);
        } catch(RuntimeException e) {
          System.out.println(e.getMessage());
          return;
@@ -26,12 +30,8 @@ public class Main {
 
   }
 
-  static String decodeBencodeExtended(String bencoString) {
-    if (bencoString.startsWith("i") && bencoString.endsWith("e")) {
+  static String decodeBencodeInteger(String bencoString) {
       return bencoString.substring(1, bencoString.length() - 1);
-    } else {
-      return decodeBencode(bencoString);
-    }
   }
 
   static String decodeBencode(String bencodedString) {
