@@ -13,7 +13,7 @@ public class Main {
        String bencodedValue = args[1];
        String decoded;
        try {
-         decoded = decodeBencode(bencodedValue);
+         decoded = decodeBencodeExtended(bencodedValue);
        } catch(RuntimeException e) {
          System.out.println(e.getMessage());
          return;
@@ -24,6 +24,14 @@ public class Main {
       System.out.println("Unknown command: " + command);
     }
 
+  }
+
+  static String decodeBencodeExtended(String bencoString) {
+    if (bencoString.startsWith("i") && bencoString.endsWith("e")) {
+      return bencoString.substring(1, bencoString.length() - 1);
+    } else {
+      return decodeBencode(bencoString);
+    }
   }
 
   static String decodeBencode(String bencodedString) {

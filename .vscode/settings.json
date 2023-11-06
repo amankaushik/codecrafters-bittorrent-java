@@ -1,3 +1,7 @@
 {
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "editor.fontSize": 18,
+    "markdown.preview.fontSize": 18,
+    "chat.editor.fontSize": 18,
+    "terminal.integrated.fontSize": 18
 }
