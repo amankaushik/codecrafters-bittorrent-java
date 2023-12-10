@@ -5,7 +5,7 @@ import java.util.List;
 public class BencodeDecoder {
 
     static List<Object> decode(String input) {
-        System.out.println("Input: " + input);
+        // System.out.println("Input: " + input);
         if (input.length() < 3) {
             return Collections.emptyList();
         }
