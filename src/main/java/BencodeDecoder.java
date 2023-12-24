@@ -1,8 +1,18 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Stack;
 
 public class BencodeDecoder {
+    static int findClosingIndex(String input, int startIndex) {
+        var ch = input.charAt(startIndex);
+        var closingIndex = startIndex;
+        while (true && ch != 'e') {
+            closingIndex++;
+            ch = input.charAt(closingIndex);
+        }
+        return closingIndex;
+    }
 
     static List<Object> decode(String input) {
         // System.out.println("Input: " + input);
@@ -14,13 +24,16 @@ public class BencodeDecoder {
 
         for (int i = 0; i < totalLength; i++) {
             if (input.charAt(i) == 'l') {
+                // System.out.println("i: " + i);
+                var closingIndex = findListClosingIndex(input, i);
+                // System.out.println("e: " + closingIndex);
                 // System.out.println("Encountered 'l', skipping iteration");
-                var closingIndex = totalLength-1;
-                var ch = input.charAt(closingIndex);
+                // var closingIndex = totalLength-1;
+                // var ch = input.charAt(closingIndex);
 
-                while (true && ch != 'e') {
-                    closingIndex--;
-                }
+                // while (true && ch != 'e') {
+                    // closingIndex--;
+                // }
                 result.add(decode(input.substring(i + 1, closingIndex)));
                 i = closingIndex;
             } else if (input.charAt(i) == 'i') {
@@ -68,5 +81,24 @@ public class BencodeDecoder {
             }
         }
         return result;
+    }
+
+    private static int findListClosingIndex(String input, int startIndex) {
+        var ch = input.charAt(startIndex);
+        var closingIndex = startIndex;
+        var stack = new Stack<Character>();
+        while (true) {
+            if (ch == 'l' || ch == 'i') {
+                stack.push(ch);
+            } else if (ch == 'e') {
+                stack.pop();
+                if (stack.isEmpty()) {
+                    break;
+                }
+            }
+            closingIndex++;
+            ch = input.charAt(closingIndex);
+        }
+        return closingIndex;
     }
 }
