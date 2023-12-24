@@ -11,12 +11,12 @@ public class Main {
        String bencodedValue = args[1];
       //  String decoded;
        try {
-        final var decodeValues = BencodeDecoder.decode(bencodedValue);
-        if (decodeValues.size() == 1) {
-          System.out.println(decodeValues.get(0));
+        final var decodeValues = BencodeDecoder._decode(bencodedValue);
+        if (decodeValues.result.size() == 1) {
+          System.out.println(decodeValues.result.get(0));
           return;
         }
-        System.out.println(decodeValues);
+        System.out.println(decodeValues.result);
        } catch(RuntimeException e) {
          System.out.println(e.getMessage());
          return;

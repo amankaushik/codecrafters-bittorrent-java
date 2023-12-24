@@ -1,20 +1,19 @@
+import java.util.List;
+
 public class DecoderResult {
-    String encodedString;
-    String decodedString;
+    List<Object> result;
+    int nextIndex;
 
-    String getDecodedString() {
-        return this.decodedString;
+    public DecoderResult(List<Object> result, int index) {
+        this.result = result;
+        this.nextIndex = index;
     }
 
-    String getEncodedString() {
-        return this.encodedString;
+    public void setResult(List<Object> result) {
+        this.result = result;
     }
 
-    void setDecodedString(String value) {
-        this.decodedString = value;
-    }
-
-    void setEncodedString(String value) {
-        this.encodedString = value;
+    public void setNextIndex(int nextIndex) {
+        this.nextIndex = nextIndex;
     }
 }
