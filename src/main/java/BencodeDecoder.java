@@ -15,6 +15,9 @@ public class BencodeDecoder {
         // System.out.println("Input: " + input);
 
         if (input.length() < 3) {
+            if (input.startsWith("d")) {
+                return new DecoderResult(Collections.singletonList("{}"), 0);
+            }
             return new DecoderResult(Collections.emptyList(), 0);
         }
 
